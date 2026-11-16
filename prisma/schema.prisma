@@ -1,0 +1,20 @@
+generator client {
+    provider = "prisma-client" // ตัวสตั ร้างโ ร้ ค้ดค้ Client รุ่นให รุ่ ม่ของ ม่ Prisma 7
+    output = "../src/generated/prisma" // โค้ดค้ ที่สที่ ร้างออกมาไปอ ร้ ยู่ที่ยู่ นี่ที่ (นี่ ห้ามแ ห้ ก้ด้ก้ วยด้ มือมื )
+    moduleFormat = "esm" // ให้ออกมาเ ห้ ป็น ESM เพราะโปรเจกต์นี้ต์ "type": "module" นี้
+}
+datasource db {
+    provider = "postgresql" // เราใช้ PostgreSQL — ช้ สาย url อยู่ในยู่ prisma.config.ts
+}
+/// นักศึกษา ศึ — ทรัพยากรเดียวของคาบ ดี นี้ ที่จะที่ ทํา CRUD ให้ครบ ห้
+model Student {
+    id String @id @default(uuid()) @db.Uuid // กุญแจห กุ ลักลั ใช้ UUID ช้ ให้ Prisma ห้ สร้างเอง ร้
+    code String @unique @db.VarChar(10) // รหัสหั นักศึกษา ศึ — @unique คือแนว คื ป้องกันกั สุดสุ ท้ายท้
+    name String @db.VarChar(100) // ชื่อชื่ –นามสกุลกุ จํา กัดกั 100 ตัวตัอักษร อั
+    email String @unique // อีเมล อี ห้ามห้ ซ้ํา กับคน กั อื่นอื่
+    score Int @default(0) // คะแนน ถ้าไถ้ ม่ส่ม่ งมาใ ส่ ห้เห้ป็น 0
+    active Boolean @default(true) // ยังยัศึกษาอ ศึ ยู่หยู่ รือไรื ม่
+    createdAt DateTime @default(now()) // เวลาที่สที่ ร้างแถว ร้ นี้ ฐานข้อข้มูลใ มู ส่ใส่ ห้เอง ห้
+    updatedAt DateTime @updatedAt // เวลาที่แที่ ก้คก้ รั้งรั้ล่าล่ สุดสุ Prisma อัปเดตใ อั ห้เอง ห้
+    @@map("students")
+}
