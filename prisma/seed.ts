@@ -9,11 +9,9 @@ const students = [
 ];
 
 async function main() {
-    // ล้างของเ ล้ ก่าก่ ก่อนก่ เพื่อใ พื่ ห้รัห้รัน seed ซ้ํา ได้เด้รื่อยรื่ ๆ ผลลัพลั ธ์เหธ์ มือนมื กันกั ทุกคทุ รั้งรั้
     await prisma.student.deleteMany();
-    // skipDuplicates: ถ้าเจอ ถ้ code หรือรื email ซ้ํา ให้ข้ห้ ามไป ข้ ไม่ต้ม่ องต้ ล้มล้
     const result = await prisma.student.createMany({ data: students, skipDuplicates: true });
-    console.log(`เพิ่มพิ่ ข้อข้มูลมู นักศึกษาแ ศึ ล้วล้ ${result.count} คน`);
+    console.log(`เพิ่มข้อมูลนักศึกษาแล้ว ${result.count} คน`);
 }
 
 main().catch((error) => { console.error("seed ไม่สําม่ สํา เร็จ:", error.message)});
